@@ -11,15 +11,22 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+var startScreenEl = document.getElementById("start-screen");
 
 // sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
 var sfxWrong = new Audio("assets/sfx/incorrect.wav");
 
+//quiz starts when start button clicked
+var start = startBtn.addEventListener("on-click", startQuiz());
+
 function startQuiz() {
   // hide start screen
- 
-  // un-hide questions section
+  if (start) {
+    startScreenEl.visibility = "block";
+    // un-hide questions section
+    questionsEl.classList.remove(".hide");
+  }
 
   // start timer
 
@@ -99,6 +106,9 @@ function checkForEnter(event) {
   // check if event key is enter
     // saveHighscore
 }
+
+//quiz starts when start button clicked
+var start = startBtn.addEventListener("click", startQuiz());
 
 // user clicks button to submit initials
 submitBtn.onclick = saveHighscore;
