@@ -54,20 +54,21 @@ function startQuiz() {
 function getQuestion() {
 
     // get current question object from array
-    questionTitle.append(questions.title);
-    console.log(questionTitle);
+      //store the output and answer choices as they're being made
+      var output = [];
+      var answers;
 
+      //for each question....
 
-  // get current question object from array
-//   for (var i = 0; i < questions.length; i++) {
-//     var question = questions[i];
+        //reset list of answers
 
-//     var qPar = document.createElement("p");
-//     qPar.textContent = questionsEl;
-//     questionsEl.appendChild(qPar);
-//     return question;
-//   }
-// }
+        //for each available answer to the question....
+
+          //add an html radio button
+
+        //add this question and answers to output
+
+      //combine output as a string and display on page 
 
 
   // questionTitle.append(questions.title);
@@ -84,6 +85,7 @@ function getQuestion() {
   // attach click event listener to each choice
 
   // display on the page
+}
 
 
 function questionClick() {
