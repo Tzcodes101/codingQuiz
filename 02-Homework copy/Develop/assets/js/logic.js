@@ -1,42 +1,77 @@
+console.log("Logic script loaded");
+
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
 var time = questions.length * 15;
 var timerId;
 
 // variables to reference DOM elements
+//grabs the div that will contain the questions element
 var questionsEl = document.getElementById("questions");
+//grabs time element
 var timerEl = document.getElementById("time");
+//grab question title within questions element
+var questionTitle = document.getElementById("question-title");
+//grabs choices element within questions
 var choicesEl = document.getElementById("choices");
+//grabs sumbit button element
 var submitBtn = document.getElementById("submit");
+//grabs start button element
 var startBtn = document.getElementById("start");
+//grabs element where user inputs initials
 var initialsEl = document.getElementById("initials");
+//grabs the element holding the feedback div
 var feedbackEl = document.getElementById("feedback");
+//grabs the div containing the start screen
 var startScreenEl = document.getElementById("start-screen");
+
+var totalSeconds = 0;
+var secondsElapsed = 0;
+var status = "Working";
+var interval;
 
 // sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
 var sfxWrong = new Audio("assets/sfx/incorrect.wav");
 
 //quiz starts when start button clicked
-var start = startBtn.addEventListener("on-click", startQuiz());
 
 function startQuiz() {
-  // hide start screen
-  if (start) {
-    startScreenEl.visibility = "block";
-    // un-hide questions section
-    questionsEl.classList.remove(".hide");
-  }
-
-  // start timer
-
-  // show starting time
-
+  setTime();
   getQuestion();
+  // hide start screen
+  startScreenEl.style.visibility = "hidden";
+  // un-hide questions section
+  questionsEl.classList.remove(".hide");
+  //show starting time
+  function setTime() {
+    timerEl.innerHTML = "";
+    totalSeconds = timerEl.textContent = 60;
+  }
 }
 
+
 function getQuestion() {
+
+    // get current question object from array
+    questionTitle.append(questions.title);
+    console.log(questionTitle);
+
+
   // get current question object from array
+//   for (var i = 0; i < questions.length; i++) {
+//     var question = questions[i];
+
+//     var qPar = document.createElement("p");
+//     qPar.textContent = questionsEl;
+//     questionsEl.appendChild(qPar);
+//     return question;
+//   }
+// }
+
+
+  // questionTitle.append(questions.title);
+  // console.log(questionTitle);
 
   // update title with current question
 
@@ -44,23 +79,23 @@ function getQuestion() {
 
   // loop over choices
 
-    // create new button for each choice
+  // create new button for each choice
 
-    // attach click event listener to each choice
+  // attach click event listener to each choice
 
-    // display on the page
-}
+  // display on the page
+
 
 function questionClick() {
   // check if user guessed wrong
-    // penalize time
+  // penalize time
 
-    // display new time on page
+  // display new time on page
 
-    // play "wrong" sound effect
+  // play "wrong" sound effect
 
   // else 
-    // play "right" sound effect
+  // play "right" sound effect
 
 
   // flash right/wrong feedback on page for half a second
@@ -68,9 +103,9 @@ function questionClick() {
   // move to next question
 
   // check if we've run out of questions
-    // quizEnd
+  // quizEnd
   // else 
-    // getQuestion
+  // getQuestion
 }
 
 function quizEnd() {
@@ -93,22 +128,22 @@ function saveHighscore() {
   // get value of input box
 
   // make sure value wasn't empty
-    // get saved scores from localstorage, or if not any, set to empty array
+  // get saved scores from localstorage, or if not any, set to empty array
 
-    // format new score object for current user
+  // format new score object for current user
 
-    // save to localstorage
+  // save to localstorage
 
-    // redirect to next page
+  // redirect to next page
 }
 
 function checkForEnter(event) {
   // check if event key is enter
-    // saveHighscore
+  // saveHighscore
 }
 
 //quiz starts when start button clicked
-var start = startBtn.addEventListener("click", startQuiz());
+startBtn.addEventListener("click", startQuiz);
 
 // user clicks button to submit initials
 submitBtn.onclick = saveHighscore;
