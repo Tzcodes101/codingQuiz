@@ -33,27 +33,3 @@ var questions = [
     answer: "console.log"
   }
 ];
-
-//need to build quiz
-function buildQuiz() {
-//loop through each question
-  questions.forEach((currentQuestion, questionNumber) => {
-    //code for each question
-  })
-
-  //create var to store list of possible answers
-  const answers = [];
-
-  //and for each available answer
-  for(letter in currentQuestion.answers) {
-
-    //add an html radio button
-    answers.push()
-  }
-    //add this question and its answers to the output
-  output.push 
-
-
-//combine output list into one string of HTML and put it on the page
-quizContainer.innerHTML = output.join('');
-}
