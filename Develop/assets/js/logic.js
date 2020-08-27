@@ -1,6 +1,7 @@
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
-var time = questions.length * 15;
+// var time = questions.length * 15;
+var time = 3;
 var timerId;
 var interval;
 
@@ -12,6 +13,7 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+var endScreenEl = document.getElementById("end-screen");
 
 
 // sound effects
@@ -29,24 +31,37 @@ function startQuiz() {
 
 
   renderTime();
+  startTime();
   getQuestion();
 }
 
 function renderTime() {
-
   // show starting time 
-  timerEl.textContent = time;
-  console.log(timerEl);
+  if (time >= 0) {
+    timerEl.textContent = time;
+    console.log(timerEl);
+  } else {
+    stopTimer();
+  }
+}
 
-  //start timer
+function startTime() {
+  //start timer if time is greater than zero
   if (time > 0) {
+    // to go down by 1 depending on which question we are in
     interval = setInterval(function () {
       --time;
+      //re-show the time every second
       renderTime();
     }, 1000);
-  } else {
-    alert("You're out of time!");
   }
+}
+
+
+//stoptimer
+function stopTimer() {
+  time = 0;
+  quizEnd();
 }
 
 
@@ -83,71 +98,75 @@ function getQuestion() {
 }
 
 function questionClick() {
+  // if answer on click = true
+    //play correct sound efect
+    //flash correct
+    //If run out of question or time
+        //quizEnd();
+      //else. move on to next question
+        //...getquestion()?
+
+  // else
+    //play wrong sound effect
+    //flash incorrect 
+    //deduct time
+     //If run out of question or time
+        //quizEnd();
+      //else. move on to next question
+        //...getquestion()?
+   
   // check if user guessed wrong
   // if (this.value !== questions[currentQuestionIndex].answer) {
   //   // penalize time
   //   time -= 15;
 
   //   if (time < 0) {
-  //     time =0;
+  //     stopTimer();
+  //   } else {
+  //     // display new time on page
+  //     timerEl.textContent = time;
   //   }
+  }
 
-  // display new time on page
+  function quizEnd() {
 
-  // play "wrong" sound effect
+    // show end screen
+    endScreenEl.classList.remove("hide");
 
-  // else 
-  // play "right" sound effect
+    // show final score
 
+    // hide questions section
+    questionsEl.setAttribute("class", "hide");
+  }
 
-  // flash right/wrong feedback on page for half a second
+  function clockTick() {
+    // update time
 
-  // move to next question
+    // check if user ran out of time
+  }
 
-  // check if we've run out of questions
-  // quizEnd
-  // else 
-  // getQuestion
-}
+  function saveHighscore() {
+    // get value of input box
 
-function quizEnd() {
-  // stop timer
+    // make sure value wasn't empty
+    // get saved scores from localstorage, or if not any, set to empty array
 
-  // show end screen
+    // format new score object for current user
 
-  // show final score
+    // save to localstorage
 
-  // hide questions section
-}
+    // redirect to next page
+  }
 
-function clockTick() {
-  // update time
+  function checkForEnter(event) {
+    // check if event key is enter
+    // saveHighscore
+  }
 
-  // check if user ran out of time
-}
+  // user clicks button to submit initials
+  submitBtn.onclick = saveHighscore;
 
-function saveHighscore() {
-  // get value of input box
+  // user clicks button to start quiz
+  startBtn.onclick = startQuiz;
 
-  // make sure value wasn't empty
-  // get saved scores from localstorage, or if not any, set to empty array
-
-  // format new score object for current user
-
-  // save to localstorage
-
-  // redirect to next page
-}
-
-function checkForEnter(event) {
-  // check if event key is enter
-  // saveHighscore
-}
-
-// user clicks button to submit initials
-submitBtn.onclick = saveHighscore;
-
-// user clicks button to start quiz
-startBtn.onclick = startQuiz;
-
-initialsEl.onkeyup = checkForEnter;
+  initialsEl.onkeyup = checkForEnter;
