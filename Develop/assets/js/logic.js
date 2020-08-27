@@ -2,6 +2,7 @@
 var currentQuestionIndex = 0;
 var time = questions.length * 15;
 var timerId;
+var interval;
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
@@ -12,6 +13,7 @@ var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
 
+
 // sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
 var sfxWrong = new Audio("assets/sfx/incorrect.wav");
@@ -20,21 +22,37 @@ function startQuiz() {
   // hide start screen
   var startScreen = document.getElementById("start-screen");
   startScreen.setAttribute("class", "hide");
- 
+
   // un-hide questions section
   questionsEl.classList.remove("hide");
   console.log(questionsEl);
 
-  // start timer
 
-  // show starting time
-
+  renderTime();
   getQuestion();
 }
 
+function renderTime() {
+
+  // show starting time 
+  timerEl.textContent = time;
+  console.log(timerEl);
+
+  //start timer
+  if (time > 0) {
+    interval = setInterval(function () {
+      --time;
+      renderTime();
+    }, 1000);
+  } else {
+    alert("You're out of time!");
+  }
+}
+
+
 function getQuestion() {
   // get current question object from array
-  var currentQuestion = questions[currentQuestionIndex]; 
+  var currentQuestion = questions[currentQuestionIndex];
   console.log(currentQuestion);
 
   // update title with current question
@@ -42,7 +60,7 @@ function getQuestion() {
   titleEl.textContent = currentQuestion.title;
 
   // clear out any old question choices
-  choicesEl.innerHTML = ""; 
+  choicesEl.innerHTML = "";
 
   // loop over choices
   for (var i = 0; i < currentQuestion.choices.length; i++) {
@@ -74,12 +92,12 @@ function questionClick() {
   //     time =0;
   //   }
 
-    // display new time on page
+  // display new time on page
 
-    // play "wrong" sound effect
+  // play "wrong" sound effect
 
   // else 
-    // play "right" sound effect
+  // play "right" sound effect
 
 
   // flash right/wrong feedback on page for half a second
@@ -87,9 +105,9 @@ function questionClick() {
   // move to next question
 
   // check if we've run out of questions
-    // quizEnd
+  // quizEnd
   // else 
-    // getQuestion
+  // getQuestion
 }
 
 function quizEnd() {
@@ -112,18 +130,18 @@ function saveHighscore() {
   // get value of input box
 
   // make sure value wasn't empty
-    // get saved scores from localstorage, or if not any, set to empty array
+  // get saved scores from localstorage, or if not any, set to empty array
 
-    // format new score object for current user
+  // format new score object for current user
 
-    // save to localstorage
+  // save to localstorage
 
-    // redirect to next page
+  // redirect to next page
 }
 
 function checkForEnter(event) {
   // check if event key is enter
-    // saveHighscore
+  // saveHighscore
 }
 
 // user clicks button to submit initials
