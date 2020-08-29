@@ -113,6 +113,7 @@ function questionClick() {
     //display "wrong" feedback
     feedbackEl.textContent = "Wrong!";
   } else {
+    score++;
 
     //play "right" sound effect
     sfxRight.play();
@@ -132,7 +133,7 @@ function questionClick() {
   // if we are out of questions, show the end page 
   if (currentQuestionIndex === questions.length) {
     quizEnd();
-  //otherwise move on to the next question
+    //otherwise move on to the next question
   } else {
     getQuestion();
   }
@@ -150,11 +151,12 @@ function quizEnd() {
   questionsEl.setAttribute("class", "hide");
 
   // show final score
-  var scoreDisplay = document.createElement("p");
-  scoreDisplay.textContent = score;
   var yourScore = document.getElementById("final-score");
-  yourScore.append(score);
+  yourScore.textContent = score;
+  highscores.push(yourScore);
 }
+
+console.log(highscores);
 
 
 function saveHighscore() {
@@ -168,12 +170,13 @@ function saveHighscore() {
       score: time,
       initials: initials
     };
-
     highscores.push(newScore);
+  } else {
     window.localStorage.setItem("highscores", JSON.stringify(highscores));
+    saveHighscore();
+  };
 
-    window.location.href = "highscores.html";
-  }
+  window.location.href = "highscores.html";
 }
 
 function checkForEnter(event) {
