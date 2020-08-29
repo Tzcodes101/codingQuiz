@@ -4,7 +4,7 @@ var time = questions.length * 15;
 // var time = 30;
 var timerId;
 var interval;
-var score = 0;
+var score = time;
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
@@ -15,7 +15,7 @@ var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
 var endScreenEl = document.getElementById("end-screen");
-var highscores = [];
+// var highscores = [];
 
 
 // sound effects
@@ -59,7 +59,7 @@ function startTime() {
 
 function stopTimer() {
   //when time is zero, show the end page
-  time = 0;
+  // time = 0;
   quizEnd();
 }
 
@@ -150,41 +150,42 @@ function quizEnd() {
   // hide questions section
   questionsEl.setAttribute("class", "hide");
 
-  // show final score
-  var yourScore = document.getElementById("final-score");
+  // show final score, add final score text content
+  yourScore = document.getElementById("final-score");
   yourScore.textContent = score;
-  highscores.push(yourScore);
 }
-
-console.log(highscores);
-
 
 function saveHighscore() {
   // get value of input box
   var initials = initialsEl.value.trim();
 
-  // make sure initials value isn't empty
+  var finalscore;
+
+  //if initials are not empty, push the score to highscore array, store the highscore in local storage as a string, or alert user to enter initials.
   if (initials !== "") {
     var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
-    var newScore = {
-      score: time,
+    finalscore = {
+      score: score,
       initials: initials
     };
-    highscores.push(newScore);
-  } else {
-    window.localStorage.setItem("highscores", JSON.stringify(highscores));
-    saveHighscore();
-  };
+  highscores.push(finalscore);
+  highscores = window.localStorage.setItem("highscores", JSON.stringify(highscores));
+  }
 
+  // highscores.push(score);
+  // highscores = window.localStorage.setItem("highscores", JSON.stringify(highscores));
+  // } else {
+  //   alert("Please enter your initials to see highscores!");
+  //   return;
+  //re-direct to highscores html
   window.location.href = "highscores.html";
 }
 
 function checkForEnter(event) {
   // check if event key is enter
-  // if (event.key === "Enter") {
-  //   saveHighscore();
-  // }
-  // saveHighscore
+  if (event.key === "Enter") {
+    saveHighscore();
+  }
 }
 
 // user clicks button to submit initials
