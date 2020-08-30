@@ -1,7 +1,6 @@
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
 var time = questions.length * 15;
-// var time = 30;
 var timerId;
 var interval;
 var score = time;
@@ -15,7 +14,6 @@ var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
 var endScreenEl = document.getElementById("end-screen");
-// var highscores = [];
 
 
 // sound effects
@@ -58,8 +56,7 @@ function startTime() {
 }
 
 function stopTimer() {
-  //when time is zero, show the end page
-  // time = 0;
+ //show the end page
   quizEnd();
 }
 
@@ -111,14 +108,14 @@ function questionClick() {
     sfxWrong.play();
 
     //display "wrong" feedback
-    feedbackEl.textContent = "Wrong!";
+    feedbackEl.textContent = "NOPE! Sorry...";
   } else {
     score++;
 
     //play "right" sound effect
     sfxRight.play();
 
-    feedbackEl.textContent = "Correct!";
+    feedbackEl.textContent = "Correct! YAY!!";
   }
 
   //flash right/wrong feedback on page for .5s
@@ -172,12 +169,6 @@ function saveHighscore() {
   highscores = window.localStorage.setItem("highscores", JSON.stringify(highscores));
   }
 
-  // highscores.push(score);
-  // highscores = window.localStorage.setItem("highscores", JSON.stringify(highscores));
-  // } else {
-  //   alert("Please enter your initials to see highscores!");
-  //   return;
-  //re-direct to highscores html
   window.location.href = "highscores.html";
 }
 
